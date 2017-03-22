@@ -1,0 +1,13 @@
+<ion-content style="background-color: #f1f1f1;">
+<div class="wxpay">
+	<div class="wxpay_main">
+		<p>微信支付</p>
+		<p><span>您将支付：</span><span>{{real_price}}元</span></p>
+		<p>长按下方二维码选择“识别二维码”完成支付</p>
+	<p>
+	
+	<qr ng-if="qrcode_url" type-number="8" correction-level="'M'" size="200" text="qrcode_url" image="true"></qr>
+	
+	</div>
+</div>
+</ion-content>

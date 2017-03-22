@@ -1,0 +1,158 @@
+<ion-content delegate-handle="mainScroll">
+	<div class="good_detail">
+		<div class="picture_head">
+		     <img src="{{compressImageUrl(item.feature_img[0],2.533)}}">
+		</div>
+		<div class="part_a">
+			<div class="part_title">
+				{{item.title}}
+			</div>
+			<div class="part_count">
+				<span class="count">{{item.page_viewed}}浏览</span>
+				<span class="count">{{item.sold}}已售</span>
+				<span class="price">
+					<a>￥</a>{{item.minimum_price}}
+					<a>起/人</a>
+				</span>
+			</div>
+		</div>
+		<div class="part_b">
+			<span>
+				<i class="iconfont">&#xe631;</i>{{item.advantage[0]}}
+			</span>
+			<span>
+				<i class="iconfont">&#xe631;</i>{{item.advantage[1]}}
+			</span>
+			<span>
+				<i class="iconfont">&#xe631;</i>{{item.advantage[2]}}
+			</span>
+		</div>
+		<div class="part_product">
+			<div class="product">
+				<span class="line"></span>
+				<span><i class="fa  iconfont ">&#xe603;</i>产品简介</span>
+			</div>
+			<div class="product_list">
+				<ul>
+					<li><span>出发地：</span><span>{{item.src[0]}}</span></li>
+					<li><span>目的地：</span><span>{{item.dst[0]}}</span></li>
+					<li><span>预定时间：</span><span ng-repeat="resv in  item.resv_time">{{resv}}&nbsp;</span></li>
+					<li><span>出发时间：</span><span ng-repeat="off in  item.off_time">{{off}}&nbsp;</span></li>
+				</ul>
+			</div>
+		</div>
+		<div class="part_fee">
+			<div class="message" ng-model='feiyong_check' ng-click="feiyong_check=!feiyong_check;gotoAnchor('fee', feiyong_check)">	   <span class="line"></span>
+				<span>
+					<i  id="fee" class="fa  iconfont ">&#xe61e;</i>费用介绍
+				</span>
+				<span class="direction">
+					<i class="iconfont">{{feiyong_check?'&#xe62f;':'&#xe630;'}}</i>
+				</span>
+			</div>
+			<div  class="message_list" ng-show="feiyong_check" ng-repeat="fee in item.fee_intro">
+				<p class="fee_include"><i class="fa  iconfont ">&#xe61b;</i>{{fee[0]}}</p>
+				<p ng-repeat="message in fee[1]">{{message}}</p>
+			</div>
+		</div>
+		<div   class="part_plan">
+			<div class="message" ng-model='fly_check' ng-click="fly_check=!fly_check;gotoAnchor('plan', fly_check)">
+				<span class="line"></span>
+				<span><i id="plan" class="fa  iconfont ">&#xe608;</i>交通信息</span>
+				<span class="direction">
+					<i class="iconfont">{{fly_check?'&#xe62f;':'&#xe630;'}}</i>
+				</span>
+			</div>
+			<div class="message_list" ng-show="fly_check">
+				<p class="title"><i class="fa  iconfont tubiao">&#xe618;</i>交通信息为参考信息,最终的交通信息以供应商提供为准</p>
+				<span class="fly_message">航班信息</span>
+				<div ng-repeat="air in item.airplane_info">
+					<p class="fly_detail"><a>{{air.direction}}</a><span class="day">{{air.day_plane[0]}}</span><span class="day">{{air.day_plane[1]}}</span></p>
+					<p class="time"><span>{{air.from[0]}}</span><span  class="address"><i class="fa  iconfont ">&#xe606;</i></span><span>{{air.to[0]}}</span></p>
+					<p class="destinations"><span class="address_des">{{air.from[1]}}</span><span>{{air.to[1]}}</span></p>
+				</div>
+			</div>
+		</div>
+		<div  class="part_hotel">
+			<div class="message" ng-model='hotel_check' ng-click="hotel_check=!hotel_check;gotoAnchor('hotel', hotel_check)">
+				<span class="line"></span>
+				<span><i  id="hotel" class="fa  iconfont ">&#xe605;</i>酒店信息</span>
+				<span class="direction">
+				<i class="iconfont">{{hotel_check?'&#xe62f;':'&#xe630;'}}</i>
+				</span>
+			</div>
+			<div class="message_list" ng-show="hotel_check">
+				<p class="title"><i class="fa  iconfont hotel_span">&#xe618;</i>酒店信息为参考信息,最终的酒店信息以供应商提供为准</p>
+				<div ng-repeat="hotel in item.hotel_info">
+					<p class="hotelname"><span>{{hotel.hotel_name}}</span></p>
+					<p>
+					<span><i ng-repeat="i in getNumber(hotel.star)" class="fa  iconfont ">&#xe61b;</i></span>
+					<span style="margin-left:-0.067rem;">或同级别酒店</span></p>
+					<p><img ng-src="{{compressImageUrl(img,1.833,4.347)}}" ng-repeat="img in hotel.img_url"></p>
+					<p><span>房型：</span><span>{{hotel.room}}</span><span>床型：</span><span>{{hotel.bed}}</span></p>
+					<p>{{hotel.description}}</p>
+				</div>
+			</div>
+		</div>
+		<div   class="part_hotel">
+			<div class="message" ng-model='road_check' ng-click="road_check=!road_check;gotoAnchor('road', road_check)"><span class="line"></span><span><i id="road"  class="fa  iconfont ">&#xe60c;</i>行程推荐</span>
+			<span class="direction">
+			<i class="iconfont">{{road_check?'&#xe62f;':'&#xe630;'}}</i>
+			</span>
+			</div>
+			<div class="part_road">
+				<div class="message_list" ng-show="road_check" ng-repeat="road in item.schedule">
+					<p>{{road.day}}</p>
+					<p>{{road.detail}}</p>
+					<p><img ng-src="{{compressImageUrl(img,1.833,4.347)}}" ng-repeat="img in road.img_url"></p>
+				</div>
+			</div>
+		</div>
+		<div   class="part_order">
+			<div class="message" ng-model='order_check' ng-click="order_check=!order_check;gotoAnchor('order', order_check)">
+				<span class="line"></span>
+				<span><i id="order" class="fa  iconfont ">&#xe620;</i>预定流程</span>
+				<span class="direction">
+					<i class="iconfont">{{order_check?'&#xe62f;':'&#xe630;'}}</i>
+				</span>
+			</div>
+			<div class="message_list" ng-show="order_check">
+				<img src="//7xls5t.com2.z0.glb.qiniucdn.com/order.png">
+			</div>
+		</div>
+		<div class="part_refund">
+			<div class="message" ng-model='refund_check' ng-click="refund_check=!refund_check;gotoAnchor('refund', refund_check)">	  <span class="line"></span>
+				<span><i id="refund" class="fa  iconfont ">&#xe607;</i>退款说明</span>
+				<span class="direction">
+				<i class="iconfont">{{refund_check?'&#xe62f;':'&#xe630;'}}</i>
+				</span>
+			</div>
+			<div class="message_list" ng-show="refund_check">
+				<p ng-repeat="information in item.refund">{{information}}</p>
+			</div>
+		</div>
+		<div class="part_other">
+			<div class="message" ng-model='other_check' ng-click="other_check=!other_check;gotoAnchor('other', other_check)">
+				<span class="line"></span><span><i id="other" class="fa  iconfont ">&#xe619;</i>其他说明</span>
+				<span class="direction">
+					<i class="iconfont">{{other_check?'&#xe62f;':'&#xe630;'}}</i>
+				</span>
+			</div>
+			<div class="message_list" ng-show="other_check">
+				<p ng-repeat="information in item.other">{{information}}</p>
+			</div>
+		</div>
+	</div>
+	<br></br>
+	<br></br>
+</ion-content>
+<div class="footer">
+    <a href="tel:028-87777006" style="text-decoration: none">
+		<div class="footer_left">
+			<span><i class="fa  iconfont ">&#xe61f;</i>咨询商家</span>
+		</div>
+	</a>
+	    <div class="footer_right" ui-sref="app.carts.list({item_id:item.id})">
+		     <span>立即预定</span>
+	    </div>
+</div>
